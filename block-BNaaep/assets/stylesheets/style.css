@@ -1,0 +1,200 @@
+/* Resets */
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* General */
+
+html {
+  font-size: 16px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1040px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.jcc {
+  justify-content: center;
+}
+
+.aic {
+  align-items: center;
+}
+
+.tac {
+  text-align: center;
+}
+
+.taj {
+  text-align: justify;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.section-padding {
+  padding: 2rem 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Custom */
+
+/* Index */
+
+header {
+  padding: 2rem 0;
+}
+
+header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: 4px;
+}
+
+header span {
+  font-style: italic;
+  font-size: 0.9rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+
+li {
+  text-align: center;
+  font-weight: 600;
+  margin: 1rem;
+}
+
+img {
+  padding-top: 1rem;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+/* About */
+
+.mail-img img {
+  margin-bottom: 10px;
+}
+
+.mail-details span {
+  color: gray;
+  font-size: 1rem;
+}
+
+.mail-details h4 {
+  margin: 10px 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.mail-btns button {
+  background-color: lightgray;
+  padding: 8px 16px;
+  font-size: 0.8rem;
+  color: #000;
+  border: none;
+  outline: none;
+  margin: 12px 0;
+}
+
+.mail-content {
+  margin-top: 2rem;
+}
+
+.mail-content p {
+  margin-bottom: 1rem;
+}
+
+/* Form */
+
+.form {
+  height: 100vh;
+}
+
+form {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 3rem;
+  border-radius: 0.8rem;
+}
+
+input, textarea {
+  display: block;
+  font-family: inherit;
+  width: 500px;
+  margin: 0.8rem 0;
+  padding: 8px 6px;
+  border-radius: 0.6rem;
+  border: 1px solid darkgray;
+  outline: none;
+}
+
+.submit {
+  margin-top: 2rem;
+  cursor: pointer;
+  background-color: #000;
+  color: #fff;
+  padding: 10px 6px;
+  font-size: 1rem;
+}
