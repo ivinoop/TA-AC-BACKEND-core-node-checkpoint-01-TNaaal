@@ -6,6 +6,7 @@ const qs = require('querystring');
 let server = http.createServer(handleRequest);
 
 function handleRequest(req, res) {
+  let parsedUrl = url.parse(req.url,true);
   let store = '';
   req.on('data', (chunk) => {
     store += chunk;
@@ -34,20 +35,59 @@ function handleRequest(req, res) {
     }
     else if(req.url === '/form' && req.method === 'POST') {
       let parsedData = qs.parse(store);
-      let userName = parsedData.username;
+      let username = parsedData.username;
+      // Handle error
       let contactsDir = __dirname + '/contacts/';
-      fs.open(contactsDir + userName + '.json', 'wx', (err, fd) => {
+      fs.open(contactsDir + username + '.json', 'wx', (err, fd) => {
         if(err) console.log(err)
-        fs.writeFile(fd, store, (err) => {
+        fs.writeFile(fd, JSON.stringify(parsedData), (err) => {
           if(err) console.log(err)
           fs.close(fd, () => {
             res.setHeader('content-type', 'text/html')
-              return res.end(`<h2>Contact "${userName}" successfully saved</h2>`);
+              return res.end(`<h2>Contact "${username}" successfully saved</h2>`);
           });
         });
       });
     }
-  });
+    // else if(parsedUrl.pathname === '/users' && req.method === 'GET') {
+    //   let username = parsedUrl.query.username;
+    //   let userPath = __dirname +'/contacts' + username +'.json';
+    //   let contactsPath = __dirname + '/contacts';
+    //   if(username) {
+    //     fs.readFile(userPath, (err, content) => {
+    //       if(err) console.log(err);
+    //       let userData = (JSON.parse(content.toString()));
+    //       res.writeHead(200, {'content-type': 'text/html'});
+    //       res.write(`<h3>${userData.name}</h3>`);
+    //       res.write(`<h3>${userData.email}</h3>`);
+    //       res.write(`<h3>${userData.username}</h3>`);
+    //       res.write(`<h3>${userData.age}</h3>`);
+    //       res.write(`<h3>${userData.bio}</h3>`);
+    //       return res.end();
+    //     });
+    //   } else {
+    //     let userFiles = fs.readdirSync(contactsPath);
+    //     let allContacts = userFiles.map((con) => {
+    //       return JSON.parse(fs.readFile(contactsPath + '/' + con));
+    //     });
+    //     let allData = '';
+    //     allContacts.forEach(contact => {
+    //       allData += 
+    //       `<h2>${contact.name}</h2>
+    //        <h2>${contact.email}</h2>
+    //        <h2>${contact.username}</h2>
+    //        <h2>${contact.age}</h2>
+    //        <h2>${contact.bio}</h2>`;
+    //     });
+    //     res.writeHead(200, {'content-type': 'text/html'});
+    //     return res.end(allContacts);
+    //   }
+    // }
+    else {
+      res.statusCode = 404;
+      res.end('Page not found');
+    }
+  }); 
 }
 
 server.listen(5000, () => {
