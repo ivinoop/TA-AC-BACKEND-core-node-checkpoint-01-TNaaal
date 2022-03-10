@@ -7,6 +7,7 @@ let server = http.createServer(handleRequest);
 
 function handleRequest(req, res) {
   let parsedUrl = url.parse(req.url,true);
+  let contactsDir = __dirname + '/contacts/';
   let store = '';
   req.on('data', (chunk) => {
     store += chunk;
@@ -36,8 +37,7 @@ function handleRequest(req, res) {
     else if(req.url === '/form' && req.method === 'POST') {
       let parsedData = qs.parse(store);
       let username = parsedData.username;
-      // Handle error
-      let contactsDir = __dirname + '/contacts/';
+      // Handle error here
       fs.open(contactsDir + username + '.json', 'wx', (err, fd) => {
         if(err) console.log(err)
         fs.writeFile(fd, JSON.stringify(parsedData), (err) => {
@@ -83,6 +83,14 @@ function handleRequest(req, res) {
     //     return res.end(allContacts);
     //   }
     // }
+    else if(req.method === 'GET' && parsedUrl.pathname === '/users') {
+      let username = parsedUrl.query.username;
+      fs.readFile(contactsDir + username + '.json', (err, content) => {
+        if(err) console.log(err);
+        res.setHeader('content-type', 'application/json');
+        return res.end(content);
+      })
+    }
     else {
       res.statusCode = 404;
       res.end('Page not found');
